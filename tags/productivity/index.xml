@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Productivity on Matthew Buckley</title>
+    <link>https://matthewwbuckley.github.io/tags/productivity/</link>
+    <description>Recent content in Productivity on Matthew Buckley</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 25 Nov 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://matthewwbuckley.github.io/tags/productivity/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>On Color Palettes</title>
+      <link>https://matthewwbuckley.github.io/posts/color-palettes/</link>
+      <pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>https://matthewwbuckley.github.io/posts/color-palettes/</guid>
+      <description>&lt;p&gt;Bought a new book on color theory today. There&amp;rsquo;s something meditative about limiting yourself to five colors. Constraints breed creativity.&lt;/p&gt;&#xA;&lt;p&gt;The book is Josef Albers&amp;rsquo; &amp;ldquo;Interaction of Color.&amp;rdquo; Published in 1963, still relevant today. His core insight: we never see colors in isolation. Every hue is influenced by its neighbors.&lt;/p&gt;&#xA;&lt;p&gt;Put a gray square on a yellow background and it looks purple. Put the same gray on a purple background and it looks yellow. The color itself hasn&amp;rsquo;t changed—only the context.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>14kb</title>
+      <link>https://matthewwbuckley.github.io/posts/small-websites/</link>
+      <pubDate>Mon, 24 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>https://matthewwbuckley.github.io/posts/small-websites/</guid>
+      <description>&lt;p&gt;The web doesn&amp;rsquo;t need to be heavy. TCP slow start means the first 14kb loads in one round trip. Everything after that costs time.&lt;/p&gt;&#xA;&lt;p&gt;System fonts. &lt;em&gt;Minimal CSS&lt;/em&gt;. &lt;strong&gt;No JavaScript unless necessary&lt;/strong&gt;. The constraint is freeing.&lt;/p&gt;&#xA;&lt;p&gt;There&amp;rsquo;s something almost meditative about working within tight constraints. When you strip away the excess, what remains has to earn its place. Every byte matters. Every decision becomes intentional.&lt;/p&gt;&#xA;&lt;p&gt;I remember the first websites I built in the late 90s. They loaded instantly on dial-up because they had to. We used tables for layout, spacer GIFs for padding, and every image was optimized within an inch of its life. Somewhere along the way, we forgot all of that.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

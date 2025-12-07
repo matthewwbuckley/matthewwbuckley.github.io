@@ -1,0 +1,29 @@
+[forest]
+bg = "#264653"
+fg = "#e9c46a"
+accent = "#2a9d8f"
+accent2 = "#f4a261"
+
+[sunset]
+bg = "#1a1a2e"
+fg = "#f4d35e"
+accent = "#e94560"
+accent2 = "#f4a261"
+
+[ocean]
+bg = "#0d1b2a"
+fg = "#e0e1dd"
+accent = "#415a77"
+accent2 = "#778da9"
+
+[mono]
+bg = "#0a0a0a"
+fg = "#f5f5f5"
+accent = "#6b6b6b"
+accent2 = "#a8a8a8"
+
+[berry]
+bg = "#2d132c"
+fg = "#f5f5f5"
+accent = "#c72c41"
+accent2 = "#801336"

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ImageMagick | Matthew Buckley</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="theme-full" style="--bg: #264653; --fg: #e9c46a; --accent: #2a9d8f; --accent2: #f4a261; --mono-bg: #0a0a0a; --mono-fg: #f5f5f5; --mono-accent: #6b6b6b; --mono-accent2: #a8a8a8;">
+<nav class="theme-switch">
+  <button data-theme="theme-full" title="Full color">◉</button>
+  <button data-theme="theme-halftone" title="Halftone">◐</button>
+  <button data-theme="theme-mono" title="Mono">○</button>
+</nav>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var saved = localStorage.getItem("tone") || "theme-full";
+    var palette = 'forest';
+
+    
+    localStorage.setItem("palette", palette);
+    var mainImg = document.querySelector(".side-strip .main-img");
+    var leftImg = document.querySelector(".side-strip .edge-left");
+    var rightImg = document.querySelector(".side-strip .edge-right");
+    var contentImgs = document.querySelectorAll(".content-img img");
+    var currentTheme = saved;
+
+    function getMainSrcs() {
+      if (!mainImg) return null;
+      var src = mainImg.getAttribute("src");
+      return {
+        full: src,
+        mono: src.replace("-" + palette + ".", "-mono."),
+        halftone: src.replace("-" + palette + ".", "-halftone."),
+      };
+    }
+
+    var mainSrcs = getMainSrcs();
+
+    var edgeBase = leftImg ? leftImg.getAttribute("src").replace(/-edge-mid\.png$/, "") : null;
+
+    function getEdgeSrc(theme) {
+      if (!edgeBase) return null;
+      var key =
+        theme === "theme-mono"
+          ? "mono"
+          : theme === "theme-halftone"
+          ? "halftone"
+          : palette;
+      return edgeBase.replace("-" + palette, "-" + key) + "-edge-mid.png";
+    }
+
+    function setTheme(theme) {
+      currentTheme = theme;
+      document.body.className = theme;
+      var key =
+        theme === "theme-mono"
+          ? "mono"
+          : theme === "theme-halftone"
+          ? "halftone"
+          : palette;
+
+      
+      if (mainImg && mainSrcs) mainImg.src = mainSrcs[theme === "theme-full" ? "full" : key];
+      var edgeSrc = getEdgeSrc(theme);
+      if (leftImg && edgeSrc) leftImg.src = edgeSrc;
+      if (rightImg && edgeSrc) rightImg.src = edgeSrc;
+
+      
+      contentImgs.forEach(function(img) {
+        var src = img.getAttribute("src");
+        var newSrc = src.replace(/\/images\/[^\/]+\//, "/images/" + key + "/");
+        img.src = newSrc;
+      });
+    }
+
+    setTheme(saved);
+
+    
+    document.querySelectorAll(".theme-switch button").forEach(function (btn) {
+      if (btn.dataset.theme === saved) {
+        btn.style.opacity = '1';
+      } else {
+        btn.style.opacity = '0.5';
+      }
+      btn.addEventListener("click", function () {
+        var theme = this.dataset.theme;
+        setTheme(theme);
+        localStorage.setItem("tone", theme);
+        
+        document.querySelectorAll(".theme-switch button").forEach(function (b) {
+          b.style.opacity = '0.5';
+        });
+        this.style.opacity = '1';
+      });
+    });
+  });
+</script>
+<main class="page-layout">
+  <article>
+    <header class="article-header">
+      <a
+        href="/posts/"
+        class="back"
+        onclick="if(history.length > 1) { history.back(); return false; }"
+        >←</a
+      >
+      <div>
+        <h1>ImageMagick</h1>
+      </div>
+    </header>
+    
+    <ul class="tags"><li class="tag tag-1">code</li>
+<li class="tag tag-2">colour-theory</li>
+<li class="tag tag-3">workflow</li>
+
+    </ul>
+    
+    <div class="content"><p>Discovered you can remap any image to a custom palette with one command. Feed it your colors, get back a perfectly matched image. The web in 1999 knew something we forgot.</p>
+<div class="content-img" style="width: 400px; height: 400px;">
+  <img src="/images/forest/Rectangle%208.png" alt="">
+</div>
+<p>The command is deceptively simple. You define a palette—four colors, maybe five—and ImageMagick does the rest. It finds the nearest match for every pixel, applies dithering to smooth the transitions, and spits out a file a fraction of the original size.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">convert input.png -dither FloydSteinberg <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -remap palette.png output.png
+</span></span></code></pre></div><p>Floyd-Steinberg dithering is the secret. It distributes the quantization error across neighboring pixels, creating the illusion of colors that aren&rsquo;t actually there. Your eye fills in the gaps.</p>
+<p>I&rsquo;ve been processing every image through this pipeline now. Photos become illustrations. Screenshots become art. The aesthetic constraint becomes a unifying thread across the whole site.</p>
+<p>There&rsquo;s something deeply satisfying about tools that do one thing well. No GUI, no subscription, no cloud upload. Just a program that&rsquo;s been quietly doing its job since 1987.</p>
+</div>
+  </article>
+  
+  <aside class="side-strip"><img
+      class="edge-left"
+      src="/images/tools/Rectangle%208-forest-edge-mid.png"
+      alt=""
+    />
+    <img class="main-img" src="/images/tools/Rectangle%208-forest.png" alt="" />
+    <img
+      class="edge-right"
+      src="/images/tools/Rectangle%208-forest-edge-mid.png"
+      alt=""
+    />
+  </aside>
+  
+</main>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Matthew Buckley</title>
+    <link>http://localhost:1313/posts/</link>
+    <description>Recent content in Posts on Matthew Buckley</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 25 Nov 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>On Color Palettes</title>
+      <link>http://localhost:1313/posts/color-palettes/</link>
+      <pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/color-palettes/</guid>
+      <description>&lt;p&gt;Bought a new book on color theory today. There&amp;rsquo;s something meditative about limiting yourself to five colors. Constraints breed creativity.&lt;/p&gt;&#xA;&lt;p&gt;The book is Josef Albers&amp;rsquo; &amp;ldquo;Interaction of Color.&amp;rdquo; Published in 1963, still relevant today. His core insight: we never see colors in isolation. Every hue is influenced by its neighbors.&lt;/p&gt;&#xA;&lt;p&gt;Put a gray square on a yellow background and it looks purple. Put the same gray on a purple background and it looks yellow. The color itself hasn&amp;rsquo;t changed—only the context.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>14kb</title>
+      <link>http://localhost:1313/posts/small-websites/</link>
+      <pubDate>Mon, 24 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/small-websites/</guid>
+      <description>&lt;p&gt;I was recently watching &lt;a href=&#34;https://www.youtube.com/watch?v=ciNXbR5wvhU&#34;&gt;a video by The Primeagen&lt;/a&gt; who was looking at an article&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Kinetic CSS</title>
+      <link>http://localhost:1313/posts/css-animations/</link>
+      <pubDate>Sun, 23 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/css-animations/</guid>
+      <description>&lt;p&gt;You don&amp;rsquo;t need JavaScript for movement. A few keyframes, some pseudo-elements, and suddenly a dot traces a square endlessly. Hypnotic.&lt;/p&gt;&#xA;&lt;div class=&#34;content-img&#34; style=&#34;width: 400px; height: 40px;&#34;&gt;&#xA;  &lt;img src=&#34;http://localhost:1313/images/ocean/Rectangle%209.png&#34; alt=&#34;&#34;&gt;&#xA;&lt;/div&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-css&#34; data-lang=&#34;css&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;@&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;keyframes&lt;/span&gt; &lt;span class=&#34;nt&#34;&gt;trace&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;%,&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;100&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;%&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;transform&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;translate&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;25&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;%&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;transform&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;translateX&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;40&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;px&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;50&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;%&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;transform&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;translate&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;40&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;px&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;40&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;px&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;75&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;%&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;transform&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;translateY&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;40&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;px&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The web has had animation capabilities for over a decade now. CSS transitions landed in 2009. Keyframe animations followed shortly after. Yet we still reach for JavaScript libraries to make things move.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>ImageMagick</title>
+      <link>http://localhost:1313/posts/tools/</link>
+      <pubDate>Sat, 22 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/tools/</guid>
+      <description>&lt;p&gt;Discovered you can remap any image to a custom palette with one command. Feed it your colors, get back a perfectly matched image. The web in 1999 knew something we forgot.&lt;/p&gt;&#xA;&lt;div class=&#34;content-img&#34; style=&#34;width: 400px; height: 400px;&#34;&gt;&#xA;  &lt;img src=&#34;http://localhost:1313/images/forest/Rectangle%208.png&#34; alt=&#34;&#34;&gt;&#xA;&lt;/div&gt;&#xA;&lt;p&gt;The command is deceptively simple. You define a palette—four colors, maybe five—and ImageMagick does the rest. It finds the nearest match for every pixel, applies dithering to smooth the transitions, and spits out a file a fraction of the original size.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>System Fonts</title>
+      <link>http://localhost:1313/posts/typography/</link>
+      <pubDate>Fri, 21 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/typography/</guid>
+      <description>&lt;p&gt;San Francisco on Mac. Segoe on Windows. Both designed by people smarter than me, optimized for screens, free in every way.&lt;/p&gt;&#xA;&lt;p&gt;Zero kilobytes. Sometimes the best choice is no choice.&lt;/p&gt;&#xA;&lt;p&gt;I used to spend hours picking typefaces. Browsing Google Fonts like it was a museum. Loading three weights of Inter plus a display font for headings. The CSS alone was 200kb before a single word rendered.&lt;/p&gt;&#xA;&lt;p&gt;Then I discovered the system font stack. One line of CSS, no network requests, instant rendering. The font is already there, cached in the operating system itself.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>14kb | Matthew Buckley</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="theme-full" style="--bg: ; --fg: ; --accent: ; --accent2: ; --mono-bg: #0a0a0a; --mono-fg: #f5f5f5; --mono-accent: #6b6b6b; --mono-accent2: #a8a8a8;">
+<nav class="theme-switch">
+  <button data-theme="theme-full" title="Full color">◉</button>
+  <button data-theme="theme-halftone" title="Halftone">◐</button>
+  <button data-theme="theme-mono" title="Mono">○</button>
+</nav>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var saved = localStorage.getItem("tone") || "theme-full";
+    var palette = 'berry ';
+
+    
+    localStorage.setItem("palette", palette);
+    var mainImg = document.querySelector(".side-strip .main-img");
+    var leftImg = document.querySelector(".side-strip .edge-left");
+    var rightImg = document.querySelector(".side-strip .edge-right");
+    var contentImgs = document.querySelectorAll(".content-img img");
+    var currentTheme = saved;
+
+    function getMainSrcs() {
+      if (!mainImg) return null;
+      var src = mainImg.getAttribute("src");
+      return {
+        full: src,
+        mono: src.replace("-" + palette + ".", "-mono."),
+        halftone: src.replace("-" + palette + ".", "-halftone."),
+      };
+    }
+
+    var mainSrcs = getMainSrcs();
+
+    var edgeBase = leftImg ? leftImg.getAttribute("src").replace(/-edge-mid\.png$/, "") : null;
+
+    function getEdgeSrc(theme) {
+      if (!edgeBase) return null;
+      var key =
+        theme === "theme-mono"
+          ? "mono"
+          : theme === "theme-halftone"
+          ? "halftone"
+          : palette;
+      return edgeBase.replace("-" + palette, "-" + key) + "-edge-mid.png";
+    }
+
+    function setTheme(theme) {
+      currentTheme = theme;
+      document.body.className = theme;
+      var key =
+        theme === "theme-mono"
+          ? "mono"
+          : theme === "theme-halftone"
+          ? "halftone"
+          : palette;
+
+      
+      if (mainImg && mainSrcs) mainImg.src = mainSrcs[theme === "theme-full" ? "full" : key];
+      var edgeSrc = getEdgeSrc(theme);
+      if (leftImg && edgeSrc) leftImg.src = edgeSrc;
+      if (rightImg && edgeSrc) rightImg.src = edgeSrc;
+
+      
+      contentImgs.forEach(function(img) {
+        var src = img.getAttribute("src");
+        var newSrc = src.replace(/\/images\/[^\/]+\//, "/images/" + key + "/");
+        img.src = newSrc;
+      });
+    }
+
+    setTheme(saved);
+
+    
+    document.querySelectorAll(".theme-switch button").forEach(function (btn) {
+      if (btn.dataset.theme === saved) {
+        btn.style.opacity = '1';
+      } else {
+        btn.style.opacity = '0.5';
+      }
+      btn.addEventListener("click", function () {
+        var theme = this.dataset.theme;
+        setTheme(theme);
+        localStorage.setItem("tone", theme);
+        
+        document.querySelectorAll(".theme-switch button").forEach(function (b) {
+          b.style.opacity = '0.5';
+        });
+        this.style.opacity = '1';
+      });
+    });
+  });
+</script>
+<main class="page-layout">
+  <article>
+    <header class="article-header">
+      <a
+        href="/posts/"
+        class="back"
+        onclick="if(history.length > 1) { history.back(); return false; }"
+        >←</a
+      >
+      <div>
+        <h1>14kb</h1>
+      </div>
+    </header>
+    
+    <ul class="tags"><li class="tag tag-1">html</li>
+<li class="tag tag-1">css</li>
+<li class="tag tag-3">productivity</li>
+<li class="tag tag-2">typography</li>
+
+    </ul>
+    
+    <div class="content"><p>I was recently watching <a href="https://www.youtube.com/watch?v=ciNXbR5wvhU">a video by The Primeagen</a> who was looking at an article</p>
+</div>
+  </article>
+  
+  <aside class="side-strip"><img
+      class="edge-left"
+      src="/images/small-websites/Rectangle%2010-berry%20-edge-mid.png"
+      alt=""
+    />
+    <img class="main-img" src="/images/small-websites/Rectangle%2010-berry%20.png" alt="" />
+    <img
+      class="edge-right"
+      src="/images/small-websites/Rectangle%2010-berry%20-edge-mid.png"
+      alt=""
+    />
+  </aside>
+  
+</main>
+
+</body>
+</html>

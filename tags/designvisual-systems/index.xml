@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Design:visual Systems on Matthew Buckley</title>
+    <link>https://matthewwbuckley.github.io/tags/designvisual-systems/</link>
+    <description>Recent content in Design:visual Systems on Matthew Buckley</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 25 Nov 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://matthewwbuckley.github.io/tags/designvisual-systems/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>On Color Palettes</title>
+      <link>https://matthewwbuckley.github.io/posts/color-palettes/</link>
+      <pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>https://matthewwbuckley.github.io/posts/color-palettes/</guid>
+      <description>&lt;p&gt;Bought a new book on color theory today. There&amp;rsquo;s something meditative about limiting yourself to five colors. Constraints breed creativity.&lt;/p&gt;&#xA;&lt;p&gt;The book is Josef Albers&amp;rsquo; &amp;ldquo;Interaction of Color.&amp;rdquo; Published in 1963, still relevant today. His core insight: we never see colors in isolation. Every hue is influenced by its neighbors.&lt;/p&gt;&#xA;&lt;p&gt;Put a gray square on a yellow background and it looks purple. Put the same gray on a purple background and it looks yellow. The color itself hasn&amp;rsquo;t changed—only the context.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

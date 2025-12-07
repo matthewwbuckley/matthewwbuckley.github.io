@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="generator" content="Hugo 0.152.2"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Matthew Buckley</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="theme-full">
+
+<script>
+  
+  (function () {
+    var savedTone = localStorage.getItem("tone") || "theme-full";
+
+    
+    document.body.className = savedTone;
+
+    
+    var palette = {
+      bg: "#0a0a0a",
+      fg: "#f5f5f5",
+      accent: "#6b6b6b",
+      accent2: "#a8a8a8",
+    };
+
+    document.documentElement.style.setProperty("--bg", palette.bg);
+    document.documentElement.style.setProperty("--fg", palette.fg);
+    document.documentElement.style.setProperty("--accent", palette.accent);
+    document.documentElement.style.setProperty("--accent2", palette.accent2);
+  })();
+
+  
+  window.addEventListener("pageshow", function (event) {
+    if (event.persisted) {
+      window.location.reload();
+    }
+  });
+</script>
+<div class="index-container">
+  <div class="canvas-wrapper">
+    <canvas id="pixel-canvas"></canvas>
+    <h1 class="canvas-title">MATTHEW<br />BUCKLEY</h1>
+    <nav class="painter-switch">
+      <button id="restart-painter" title="Restart">⟳</button>
+      <button data-painter="perlin-octave-colors" title="Perlin Octave Colors">
+        ≋
+      </button>
+      <button data-painter="voronoi" title="Voronoi">⊙</button>
+      <button data-painter="game-of-life-age" title="Game of Life (Age)">
+        ⚭
+      </button>
+      <button
+        data-painter="game-of-life-death-palette"
+        title="Game of Life (Palette)"
+      >
+        ⚮
+      </button>
+      <button data-painter="langtons-ant" title="Langtons Ant">⋯</button>
+      <button data-painter="perlin-gradient-colors" title="Perlin Gradient">
+        ≈
+      </button>
+    </nav>
+  </div>
+  <main>
+    <h2 id="hello-i-am-matthew-buckley">Hello, I am Matthew Buckley.</h2>
+<h3 id="i-like-programming">I like programming.</h3>
+<p>This is a personal blog that will look at mostly programming and design.</p>
+
+
+    <ul class="post-list">
+      
+      <li>
+        <a href="/posts/color-palettes/">On Color Palettes</a>
+      </li>
+      
+      <li>
+        <a href="/posts/small-websites/">14kb</a>
+      </li>
+      
+      <li>
+        <a href="/posts/css-animations/">Kinetic CSS</a>
+      </li>
+      
+      <li>
+        <a href="/posts/tools/">ImageMagick</a>
+      </li>
+      
+      <li>
+        <a href="/posts/typography/">System Fonts</a>
+      </li>
+      
+    </ul>
+  </main>
+</div>
+<script>
+  (function () {
+    var saved = localStorage.getItem("painter") || "game-of-life-death-palette";
+    var script = document.createElement("script");
+    script.src = "/js/pixel-painters/" + saved + ".js";
+    document.currentScript.parentNode.insertBefore(
+      script,
+      document.currentScript
+    );
+  })();
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var savedPainter =
+      localStorage.getItem("painter") || "game-of-life-death-palette";
+
+    
+    var restartBtn = document.getElementById("restart-painter");
+    if (restartBtn) {
+      restartBtn.style.opacity = "0.5";
+      restartBtn.addEventListener("click", function () {
+        window.location.reload();
+      });
+    }
+
+    
+    document
+      .querySelectorAll(".painter-switch button[data-painter]")
+      .forEach(function (btn) {
+        if (btn.dataset.painter === savedPainter) {
+          btn.style.opacity = "1";
+        } else {
+          btn.style.opacity = "0.5";
+        }
+        btn.addEventListener("click", function () {
+          var painter = this.dataset.painter;
+          localStorage.setItem("painter", painter);
+          window.location.reload();
+        });
+      });
+  });
+</script>
+
+</body>
+</html>
