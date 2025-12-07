@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>New Personal Site | Matthew Buckley</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="theme-full" style="--bg: #1B3644; --fg: #F2FF26; --accent: #FF7340; --accent2: #340059; --mono-bg: #0a0a0a; --mono-fg: #f5f5f5; --mono-accent: #6b6b6b; --mono-accent2: #a8a8a8;">
+<nav class="theme-switch">
+  <button data-theme="theme-full" title="Full color">◉</button>
+  <button data-theme="theme-halftone" title="Halftone">◐</button>
+  <button data-theme="theme-mono" title="Mono">○</button>
+</nav>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var saved = localStorage.getItem("tone") || "theme-halftone";
+    var palette = '253';
+
+    
+    localStorage.setItem("palette", palette);
+    var mainImg = document.querySelector(".side-strip .main-img");
+    var leftImg = document.querySelector(".side-strip .edge-left");
+    var rightImg = document.querySelector(".side-strip .edge-right");
+    var contentImgs = document.querySelectorAll(".content-img img");
+    var currentTheme = saved;
+
+    function getMainSrcs() {
+      if (!mainImg) return null;
+      var src = mainImg.getAttribute("src");
+      return {
+        full: src,
+        mono: src.replace("-" + palette + ".", "-mono."),
+        halftone: src.replace("-" + palette + ".", "-halftone."),
+      };
+    }
+
+    var mainSrcs = getMainSrcs();
+
+    var edgeBase = leftImg ? leftImg.getAttribute("src").replace(/-edge-mid\.png$/, "") : null;
+
+    function getEdgeSrc(theme) {
+      if (!edgeBase) return null;
+      var key =
+        theme === "theme-mono"
+          ? "mono"
+          : theme === "theme-halftone"
+          ? "halftone"
+          : palette;
+      return edgeBase.replace("-" + palette, "-" + key) + "-edge-mid.png";
+    }
+
+    function setTheme(theme) {
+      currentTheme = theme;
+      document.body.className = theme;
+      var key =
+        theme === "theme-mono"
+          ? "mono"
+          : theme === "theme-halftone"
+          ? "halftone"
+          : palette;
+
+      
+      if (mainImg && mainSrcs) mainImg.src = mainSrcs[theme === "theme-full" ? "full" : key];
+      var edgeSrc = getEdgeSrc(theme);
+      if (leftImg && edgeSrc) leftImg.src = edgeSrc;
+      if (rightImg && edgeSrc) rightImg.src = edgeSrc;
+
+      
+      contentImgs.forEach(function(img) {
+        var src = img.getAttribute("src");
+        var newSrc = src.replace(/\/images\/[^\/]+\//, "/images/" + key + "/");
+        img.src = newSrc;
+      });
+    }
+
+    setTheme(saved);
+
+    
+    document.querySelectorAll(".theme-switch button").forEach(function (btn) {
+      if (btn.dataset.theme === saved) {
+        btn.style.opacity = '1';
+      } else {
+        btn.style.opacity = '0.5';
+      }
+      btn.addEventListener("click", function () {
+        var theme = this.dataset.theme;
+        setTheme(theme);
+        localStorage.setItem("tone", theme);
+        
+        document.querySelectorAll(".theme-switch button").forEach(function (b) {
+          b.style.opacity = '0.5';
+        });
+        this.style.opacity = '1';
+      });
+    });
+  });
+</script>
+<main class="page-layout">
+  <article>
+    <header class="article-header">
+      <a
+        href="/posts/"
+        class="back"
+        onclick="if(history.length > 1) { history.back(); return false; }"
+        >←</a
+      >
+      <div>
+        <h1>New Personal Site</h1>
+      </div>
+    </header>
+    
+    <ul class="tags"><li class="tag tag-4">performance</li>
+<li class="tag tag-4">images</li>
+
+    </ul>
+    
+    <div class="content"><p>I was recently watching <a href="https://www.youtube.com/watch?v=ciNXbR5wvhU">a video by The Primeagen</a> who was looking at an article called <a href="https://endtimes.dev/why-your-website-should-be-under-14kb-in-size/">&ldquo;Why your website should be under 14kB in size&rdquo;</a>. It gave me the excuse I needed to rewrite my website.</p>
+<h3 id="tcp-communication">TCP communication</h3>
+<p>The first communication from a server to the client is often 10 TCP packets. The client will return an acknowledgement, then the server sends more. Each TCP package contains about 1.4kb of data, leading to a 14kb limit. If we have everything we need inside that 14kb we can avoid that round trip, loading the website as soon as possible.</p>
+<h3 id="fun-challenges">Fun challenges</h3>
+<p>The first thing I do when trying to design a website is to try to pick fonts which fit the theme/idea I am aiming towards. Generally, fonts are pretty big files to fit into 14kb. Too big unless you do something special. So no fun fonts for me (yet).</p>
+<p>How about images? They are pretty big too. You may see that I have decided to go for a pixelated look. I grew up with point and click adventure games like Monkey Island, Day of the Tentacle, and (my favorite) Toonstruck, so I am very fond of pixel art. So this limitation was a benefit to me.</p>
+<h3 id="colour">Colour</h3>
+<p>The images are still quite big though if I want large ones. I had recently bought an interesting book on natural colour combinations from Japan<sup>*</sup> and thought it would be fun to use it as a source of colour palettes for my site. This page uses palette 253 with &ldquo;Lemon Yellow&rdquo;, &ldquo;Apricot Orange&rdquo;, Slate Color&quot;, and &ldquo;Cotinga Purple&rdquo;.</p>
+<p>However, contrast is a big problem with some of these palettes. My original plan was to allow the user to switch between the palette and monochrome. Then I had the idea to mix both of these, to create a half tone. You can see these toggles in the top right.</p>
+<h3 id="images">Images</h3>
+<p>I wanted the images to match this pallet. Which you can do with color quantization. But now with full, half and monochrome paletts I now need 3 images for every image shown on the site. Thankfully only one is needed at a time, so the page load stays small. But the halftone is done a little different. We dont quantize the half tones, we quantize the full tone and combine it with the monochrome. This leads to images with 4 hues, each with up to 4 tones. It was a happy accident really, but it add a lot of depth to the image while keeping the restricted colour palette I wanted, so I decided to keep it.</p>
+<h3 id="conclusions">Conclusions</h3>
+<p>Overall I am very happy with how the website turned out. There are a lot of little pieces that add up to be kind of interesting. I will write more about the image quantization later, because its a very cool little package called <a href="https://github.com/ImageMagick/ImageMagick">imageMagick</a> and I want to know what more you can do with it.</p>
+<p>Hope you have enjoyed. I am trying to keep these posts short and punchy. I didnt even go into how I am using Hugo for the first time to generate this site.</p>
+<hr>
+<p>* - <a
+  href="https://amazon.co.uk/dp/4861522471?tag=matthewwbuckl-21"
+  class="amazon-link"
+  data-asin="4861522471"
+  target="_blank"
+  rel="noopener noreferrer"
+  >A Dictionary of Color Combinations ↗</a
+>
+<script>
+  (function () {
+    var link =
+      document.currentScript.previousElementSibling.previousElementSibling;
+    var asin = link.dataset.asin;
+    var timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    var isUS =
+      timezone.includes("America") &&
+      !timezone.includes("Argentina") &&
+      !timezone.includes("Sao_Paulo");
+
+    if (isUS) {
+      link.href = "https://amazon.com/dp/" + asin + "?tag=matthewwbuckl-20";
+    } else {
+      link.href = "https://amazon.co.uk/dp/" + asin + "?tag=matthewwbuckl-21";
+    }
+  })();
+</script>
+. Its by Sanzo Wada, based on an original 6-volume work called Haishoku Soukan, and one of the first considerations of how colours are used in combination. Sadly does not come with hexcodes or rgb values. You can get all the colours palettes online if you want, but if you want a little book with them in you can use my affiliate link above.</p>
+</div>
+  </article>
+  
+  <aside class="side-strip"><img
+      class="edge-left"
+      src="/images/redesign-of-personal-site/redesign-of-personal-site-side-253-edge-mid.png"
+      alt=""
+    />
+    <img class="main-img" src="/images/redesign-of-personal-site/redesign-of-personal-site-side-253.png" alt="" />
+    <img
+      class="edge-right"
+      src="/images/redesign-of-personal-site/redesign-of-personal-site-side-253-edge-mid.png"
+      alt=""
+    />
+  </aside>
+  
+</main>
+
+</body>
+</html>

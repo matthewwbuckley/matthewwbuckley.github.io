@@ -247,7 +247,7 @@ article {
 }
 
 .content {
-  max-width: 400px;
+  max-width: 600px;
 }
 
 .article-header {
@@ -446,6 +446,6 @@ article {
   }
 
   article {
-    padding: 0.5rem;
+    padding: 1rem;
   }
 }
