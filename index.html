@@ -1,125 +1,163 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta name="generator" content="Hugo 0.152.2">
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Matthew Buckley</title>
-  <link rel="stylesheet" href="/css/style.css">
-</head>
-<body class="theme-full">
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Matthew Buckley</title><link rel="stylesheet" href="/_astro/_slug_.BbPH2Ol4.css"></head> <body class="theme-full">  <script>
+    // Use theme-full so CSS passes vars through; tone mixing is done in JS
+    (function () {
+      document.body.className = "theme-full";
+      // Default to mono until palette loads (avoids flash)
+      var root = document.documentElement;
+      root.style.setProperty("--bg", "#0a0a0a");
+      root.style.setProperty("--fg", "#f5f5f5");
+      root.style.setProperty("--accent", "#6b6b6b");
+      root.style.setProperty("--accent2", "#a8a8a8");
+    })();
 
-<script>
-  
-  (function () {
-    var savedTone = localStorage.getItem("tone") || "theme-full";
+    // Reload page when returning via browser back button to pick up changes
+    window.addEventListener("pageshow", function (event) {
+      if (event.persisted) window.location.reload();
+    });
+  </script> <div class="index-container"> <div class="canvas-wrapper"> <canvas id="pixel-canvas"></canvas> <h1 class="canvas-title">MATTHEW<br>BUCKLEY</h1> <div class="canvas-controls"> <div class="controls-top"> <nav class="tone-switch"> <button data-tone="full" title="Full colour">◉</button> <button data-tone="halftone" title="Halftone">◐</button> <button data-tone="mono" title="Mono">○</button> </nav> <button id="restart-painter" class="control-btn" title="Random palette"><span class="star-icon">✦</span></button> <a href="/palettes" class="palette-display"> <div class="palette-swatches"> <span class="swatch" id="swatch-bg"></span> <span class="swatch" id="swatch-accent"></span> <span class="swatch" id="swatch-accent2"></span> <span class="swatch" id="swatch-fg"></span> </div> <span class="palette-id-display" id="palette-id-display">—</span> </a> </div> <nav class="painter-switch"> <button data-painter="perlin-octave-colors" title="Perlin Octave Colors">≋</button> <button data-painter="voronoi" title="Voronoi">⊙</button> <button data-painter="game-of-life-age" title="Game of Life (Age)">⚭</button> <button data-painter="game-of-life-death-palette" title="Game of Life (Palette)">⚮</button> <button data-painter="langtons-ant" title="Langtons Ant">⋯</button> <button data-painter="perlin-gradient-colors" title="Perlin Gradient">≈</button> </nav> </div> </div> <main> <div class="intro"> <p class="intro-hello">Hello, I am</p> <h2 class="intro-name">Matthew<br>Buckley.</h2> <p class="intro-sub">Programming &amp; design</p> </div> <ul class="post-cards"> <li class="post-card"> <a href="/posts/redesign-of-personal-site/" class="post-card-link"> <div class="post-card-meta"> <time class="post-card-date">Dec 2025</time> <span class="post-card-category">blog</span> </div> <h3 class="post-card-title">New Personal Site</h3> <ul class="tags post-card-tags"> <li class="tag tag-1">performance</li><li class="tag tag-2">images</li><li class="tag tag-3">astro</li> </ul> </a> </li><li class="post-card"> <a href="/posts/personal-tool-suite/" class="post-card-link"> <div class="post-card-meta"> <time class="post-card-date">Jan 2025</time> <span class="post-card-category">blog</span> </div> <h3 class="post-card-title">Personal Tools Suite</h3> <ul class="tags post-card-tags"> <li class="tag tag-1">ai</li><li class="tag tag-2">images</li><li class="tag tag-3">imagemagick</li> </ul> </a> </li> </ul> </main> </div> <script>
+    (function () {
+      var allPalettes = null;
+      var mono ={ bg: '#0a0a0a', fg: '#f5f5f5', accent: '#6b6b6b', accent2: '#a8a8a8' };
 
-    
-    document.body.className = savedTone;
+      function luminance(hex) {
+        var r = parseInt(hex.slice(1, 3), 16) / 255;
+        var g = parseInt(hex.slice(3, 5), 16) / 255;
+        var b = parseInt(hex.slice(5, 7), 16) / 255;
+        return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+      }
 
-    
-    var palette = {
-      bg: "#0a0a0a",
-      fg: "#f5f5f5",
-      accent: "#6b6b6b",
-      accent2: "#a8a8a8",
-    };
+      function mixHex(c1, c2, ratio) {
+        var r = Math.round(parseInt(c1.slice(1,3),16)*ratio + parseInt(c2.slice(1,3),16)*(1-ratio));
+        var g = Math.round(parseInt(c1.slice(3,5),16)*ratio + parseInt(c2.slice(3,5),16)*(1-ratio));
+        var b = Math.round(parseInt(c1.slice(5,7),16)*ratio + parseInt(c2.slice(5,7),16)*(1-ratio));
+        return '#' + r.toString(16).padStart(2,'0') + g.toString(16).padStart(2,'0') + b.toString(16).padStart(2,'0');
+      }
 
-    document.documentElement.style.setProperty("--bg", palette.bg);
-    document.documentElement.style.setProperty("--fg", palette.fg);
-    document.documentElement.style.setProperty("--accent", palette.accent);
-    document.documentElement.style.setProperty("--accent2", palette.accent2);
-  })();
+      function normalizePalette(palette) {
+        if (palette.bg) return { bg: palette.bg, fg: palette.fg, accent: palette.accent, accent2: palette.accent2 };
+        var sorted = palette.colors.slice().sort(function (a, b) { return luminance(a) - luminance(b); });
+        return { bg: sorted[0], accent: sorted[1], accent2: sorted[2], fg: sorted[3] };
+      }
 
-  
-  window.addEventListener("pageshow", function (event) {
-    if (event.persisted) {
-      window.location.reload();
-    }
-  });
-</script>
-<div class="index-container">
-  <div class="canvas-wrapper">
-    <canvas id="pixel-canvas"></canvas>
-    <h1 class="canvas-title">MATTHEW<br />BUCKLEY</h1>
-    <nav class="painter-switch">
-      <button id="restart-painter" title="Restart">⟳</button>
-      <button data-painter="perlin-octave-colors" title="Perlin Octave Colors">
-        ≋
-      </button>
-      <button data-painter="voronoi" title="Voronoi">⊙</button>
-      <button data-painter="game-of-life-age" title="Game of Life (Age)">
-        ⚭
-      </button>
-      <button
-        data-painter="game-of-life-death-palette"
-        title="Game of Life (Palette)"
-      >
-        ⚮
-      </button>
-      <button data-painter="langtons-ant" title="Langtons Ant">⋯</button>
-      <button data-painter="perlin-gradient-colors" title="Perlin Gradient">
-        ≈
-      </button>
-    </nav>
-  </div>
-  <main>
-    <h2 id="hello-i-am-matthew-buckley">Hello, I am Matthew Buckley.</h2>
-<h3 id="i-like-programming">I like programming.</h3>
-<p>This is a personal blog that will look at mostly programming and design.</p>
+      function applyTone(normalized, tone) {
+        if (tone === 'mono') return { bg: mono.bg, fg: mono.fg, accent: mono.accent, accent2: mono.accent2 };
+        if (tone === 'halftone') return {
+          bg: mixHex(normalized.bg, mono.bg, 0.5),
+          fg: mixHex(normalized.fg, mono.fg, 0.5),
+          accent: mixHex(normalized.accent, mono.accent, 0.5),
+          accent2: mixHex(normalized.accent2, mono.accent2, 0.5)
+        };
+        return normalized;
+      }
 
+      function updateSwatches(toned) {
+        document.getElementById('swatch-bg').style.background = toned.bg;
+        document.getElementById('swatch-accent').style.background = toned.accent;
+        document.getElementById('swatch-accent2').style.background = toned.accent2;
+        document.getElementById('swatch-fg').style.background = toned.fg;
+      }
 
-    <ul class="post-list">
-      
-      <li>
-        <a href="/posts/redesign-of-personal-site/">New Personal Site</a>
-      </li>
-      
-    </ul>
-  </main>
-</div>
-<script>
-  (function () {
-    var saved = localStorage.getItem("painter") || "game-of-life-death-palette";
-    var script = document.createElement("script");
-    script.src = "/js/pixel-painters/" + saved + ".js";
-    document.currentScript.parentNode.insertBefore(
-      script,
-      document.currentScript
-    );
-  })();
-</script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    var savedPainter =
-      localStorage.getItem("painter") || "game-of-life-death-palette";
+      function updateDisplay(id) {
+        document.getElementById('palette-id-display').textContent = id;
+      }
 
-    
-    var restartBtn = document.getElementById("restart-painter");
-    if (restartBtn) {
-      restartBtn.style.opacity = "0.5";
-      restartBtn.addEventListener("click", function () {
-        window.location.reload();
-      });
-    }
+      function applyPalette(palette, save) {
+        var tone = localStorage.getItem('painter-tone') || 'halftone';
+        var normalized = normalizePalette(palette);
+        var toned = applyTone(normalized, tone);
+        window.paletteConfig = toned;
+        updateSwatches(toned);
+        updateDisplay(palette.id);
+        // Push toned colors into CSS vars so the whole page reflects the palette
+        var root = document.documentElement;
+        root.style.setProperty('--bg', toned.bg);
+        root.style.setProperty('--fg', toned.fg);
+        root.style.setProperty('--accent', toned.accent);
+        root.style.setProperty('--accent2', toned.accent2);
+        if (save) localStorage.setItem('paletteId', palette.id);
+      }
 
-    
-    document
-      .querySelectorAll(".painter-switch button[data-painter]")
-      .forEach(function (btn) {
-        if (btn.dataset.painter === savedPainter) {
-          btn.style.opacity = "1";
-        } else {
-          btn.style.opacity = "0.5";
-        }
-        btn.addEventListener("click", function () {
-          var painter = this.dataset.painter;
-          localStorage.setItem("painter", painter);
-          window.location.reload();
+      function setupToneButtons() {
+        var tone = localStorage.getItem('painter-tone') || 'halftone';
+        document.querySelectorAll('.tone-switch button[data-tone]').forEach(function (btn) {
+          btn.style.opacity = btn.dataset.tone === tone ? '1' : '0.5';
+          btn.addEventListener('click', function () {
+            localStorage.setItem('painter-tone', this.dataset.tone);
+            window.location.reload();
+          });
         });
-      });
-  });
-</script>
+      }
 
-</body>
-</html>
+      function loadPainter(name) {
+        var script = document.createElement('script');
+        script.src = '/js/pixel-painters/' + name + '.js';
+        document.body.appendChild(script);
+      }
+
+      function setupNextPalette(palettes) {
+        var tone = localStorage.getItem('painter-tone') || 'halftone';
+        var nextId = localStorage.getItem('nextPaletteId');
+        var nextIdx = nextId ? palettes.findIndex(function (p) { return p.id === nextId; }) : -1;
+        if (nextIdx === -1) {
+          nextIdx = ~~(Math.random() * palettes.length);
+          localStorage.setItem('nextPaletteId', palettes[nextIdx].id);
+        }
+        var next = applyTone(normalizePalette(palettes[nextIdx]), tone);
+        var colors = [next.bg, next.accent, next.accent2, next.fg, next.accent, next.bg];
+        var pct = 100 / (colors.length - 1);
+        var stops = colors.map(function (c, i) {
+          return (i * pct).toFixed(1) + '% { color: ' + c + '; border-color: ' + c + '; }';
+        }).join('\n          ');
+        var style = document.createElement('style');
+        style.textContent = '@keyframes next-palette { ' + stops + ' } #restart-painter { animation: next-palette 3s linear infinite; opacity: 1; border-color: currentColor; font-size: 1.5rem; }';
+        document.head.appendChild(style);
+
+        return nextIdx;
+      }
+
+      function setupPainterButtons(savedPainter, nextIdx) {
+        var restartBtn = document.getElementById('restart-painter');
+        if (restartBtn) {
+          restartBtn.addEventListener('click', function () {
+            // Jump to the pre-picked next palette, then queue a new one
+            var next = allPalettes[nextIdx];
+            localStorage.setItem('paletteId', next.id);
+            localStorage.removeItem('nextPaletteId');
+            window.location.reload();
+          });
+        }
+
+        document.querySelectorAll('.painter-switch button[data-painter]').forEach(function (btn) {
+          btn.style.opacity = btn.dataset.painter === savedPainter ? '1' : '0.5';
+          btn.addEventListener('click', function () {
+            localStorage.setItem('painter', this.dataset.painter);
+            window.location.reload();
+          });
+        });
+      }
+
+
+      // Boot sequence
+      fetch('/palettes.json')
+        .then(function (r) { return r.json(); })
+        .then(function (palettes) {
+          allPalettes = palettes;
+
+          var savedId = localStorage.getItem('paletteId');
+          var idx = savedId ? palettes.findIndex(function (p) { return p.id === savedId; }) : -1;
+
+          if (idx === -1) {
+            idx = ~~(Math.random() * palettes.length);
+            localStorage.setItem('paletteId', palettes[idx].id);
+          }
+
+          applyPalette(palettes[idx], false);
+
+          var nextIdx = setupNextPalette(palettes);
+          var savedPainter = localStorage.getItem('painter') || 'game-of-life-death-palette';
+          setupPainterButtons(savedPainter, nextIdx);
+          setupToneButtons();
+          loadPainter(savedPainter);
+        });
+    })();
+  </script>  </body></html>

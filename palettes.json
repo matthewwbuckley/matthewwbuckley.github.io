@@ -1,0 +1,1311 @@
+[
+  {
+    "id": "241",
+    "name": "241",
+    "colors": [
+      "#dd4027",
+      "#ffefae",
+      "#c5a56e",
+      "#547076"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "242",
+    "name": "242",
+    "colors": [
+      "#f37f94",
+      "#ae5224",
+      "#008842",
+      "#111314"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "243",
+    "name": "243",
+    "colors": [
+      "#bb7125",
+      "#ebd3a2",
+      "#6b7140",
+      "#34454c"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "244",
+    "name": "244",
+    "colors": [
+      "#b59392",
+      "#c56127",
+      "#6d7e77",
+      "#007190"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "245",
+    "name": "245",
+    "colors": [
+      "#a62c37",
+      "#819238",
+      "#12354e",
+      "#34454c"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "246",
+    "name": "246",
+    "colors": [
+      "#f8b6ba",
+      "#a84222",
+      "#f5ecc2",
+      "#fdc57e"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "247",
+    "name": "247",
+    "colors": [
+      "#bb7125",
+      "#ffdd00",
+      "#00978d",
+      "#1c4286"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "248",
+    "name": "248",
+    "colors": [
+      "#f37f94",
+      "#bc892b",
+      "#b5b1d8",
+      "#704357"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "249",
+    "name": "249",
+    "colors": [
+      "#793327",
+      "#c2ae93",
+      "#d6b43e",
+      "#547076"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "251",
+    "name": "251",
+    "colors": [
+      "#a72144",
+      "#fff200",
+      "#008842",
+      "#34454c"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "252",
+    "name": "252",
+    "colors": [
+      "#da525d",
+      "#bb7125",
+      "#c19f2c",
+      "#099197"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "253",
+    "name": "253",
+    "colors": [
+      "#f8ed43",
+      "#f68c50",
+      "#501345",
+      "#34454c"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "254",
+    "name": "254",
+    "colors": [
+      "#f8b6ba",
+      "#f5ecc2",
+      "#837e31",
+      "#ca92a8"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "255",
+    "name": "255",
+    "colors": [
+      "#bb7125",
+      "#cab356",
+      "#78cdd0",
+      "#111314"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "256",
+    "name": "256",
+    "colors": [
+      "#eea78c",
+      "#f37420",
+      "#009465",
+      "#111314"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "257",
+    "name": "257",
+    "colors": [
+      "#e31f26",
+      "#fcb315",
+      "#006eb8",
+      "#a36aa5"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "258",
+    "name": "258",
+    "colors": [
+      "#802626",
+      "#eeb480",
+      "#837e31",
+      "#007190"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "259",
+    "name": "259",
+    "colors": [
+      "#f8ed43",
+      "#099197",
+      "#005b8d",
+      "#a1a39a"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "260",
+    "name": "260",
+    "colors": [
+      "#d46d7a",
+      "#eea78c",
+      "#b4cdc2",
+      "#00b49b"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "261",
+    "name": "261",
+    "colors": [
+      "#a72144",
+      "#ffefae",
+      "#78cdd0",
+      "#a1a39a"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "262",
+    "name": "262",
+    "colors": [
+      "#da525d",
+      "#ebd3a2",
+      "#a49531",
+      "#437742"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "263",
+    "name": "263",
+    "colors": [
+      "#ae5224",
+      "#eeb480",
+      "#b5decc",
+      "#34454c"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "264",
+    "name": "264",
+    "colors": [
+      "#f8b6ba",
+      "#dd4027",
+      "#b7c2a9",
+      "#0093a5"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "265",
+    "name": "265",
+    "colors": [
+      "#d46d7a",
+      "#ffdd00",
+      "#a6a159",
+      "#0d1c43"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "266",
+    "name": "266",
+    "colors": [
+      "#e31f26",
+      "#ebd3a2",
+      "#788860",
+      "#00978d"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "267",
+    "name": "267",
+    "colors": [
+      "#fdbf68",
+      "#f99d1b",
+      "#00978d",
+      "#006eb8"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "268",
+    "name": "268",
+    "colors": [
+      "#b59392",
+      "#bb7125",
+      "#253122",
+      "#bce4e5"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "269",
+    "name": "269",
+    "colors": [
+      "#bb7125",
+      "#802626",
+      "#a36aa5",
+      "#111314"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "270",
+    "name": "270",
+    "colors": [
+      "#da525d",
+      "#f5ecc2",
+      "#6b7140",
+      "#437742"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "271",
+    "name": "271",
+    "colors": [
+      "#b71f57",
+      "#96d1aa",
+      "#099197",
+      "#112f2c"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "272",
+    "name": "272",
+    "colors": [
+      "#ffefae",
+      "#f37420",
+      "#b5decc",
+      "#97acc8"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "273",
+    "name": "273",
+    "colors": [
+      "#f9c1ce",
+      "#7d133a",
+      "#a36752",
+      "#b6bfc1"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "274",
+    "name": "274",
+    "colors": [
+      "#f15a30",
+      "#8b835b",
+      "#5a82b3",
+      "#9a72aa"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "275",
+    "name": "275",
+    "colors": [
+      "#c55347",
+      "#c2ae93",
+      "#762c19",
+      "#7a4456"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "276",
+    "name": "276",
+    "colors": [
+      "#f37f94",
+      "#fdd4bd",
+      "#afd472",
+      "#111314"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "277",
+    "name": "277",
+    "colors": [
+      "#f27291",
+      "#b73f74",
+      "#837e31",
+      "#0d1c43"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "278",
+    "name": "278",
+    "colors": [
+      "#fdbf68",
+      "#d6b43e",
+      "#437742",
+      "#004f46"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "279",
+    "name": "279",
+    "colors": [
+      "#bb7125",
+      "#eea78c",
+      "#c2ae93",
+      "#12354e"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "280",
+    "name": "280",
+    "colors": [
+      "#da525d",
+      "#555832",
+      "#ca92a8",
+      "#7a4456"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "281",
+    "name": "281",
+    "colors": [
+      "#ffefae",
+      "#00978d",
+      "#96d1aa",
+      "#007190"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "282",
+    "name": "282",
+    "colors": [
+      "#da525d",
+      "#c59f6b",
+      "#96d1aa",
+      "#b984af"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "283",
+    "name": "283",
+    "colors": [
+      "#ab544d",
+      "#802626",
+      "#719470",
+      "#62c6bf"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "284",
+    "name": "284",
+    "colors": [
+      "#e2625e",
+      "#ffdd00",
+      "#00b49b",
+      "#004f46"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "285",
+    "name": "285",
+    "colors": [
+      "#b59392",
+      "#ae5224",
+      "#f15a30",
+      "#b5decc"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "286",
+    "name": "286",
+    "colors": [
+      "#ae5224",
+      "#fcb315",
+      "#00939b",
+      "#40456a"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "287",
+    "name": "287",
+    "colors": [
+      "#f37f94",
+      "#cab356",
+      "#a7d4e4",
+      "#78cdd0"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "288",
+    "name": "288",
+    "colors": [
+      "#f99d1b",
+      "#644b1e",
+      "#7a4456",
+      "#111314"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "289",
+    "name": "289",
+    "colors": [
+      "#f8ed43",
+      "#c7d14f",
+      "#40456a",
+      "#0d1c43"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "290",
+    "name": "290",
+    "colors": [
+      "#6d4145",
+      "#ffefae",
+      "#555832",
+      "#96d1aa"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "291",
+    "name": "291",
+    "colors": [
+      "#c7d14f",
+      "#00b49b",
+      "#96d1aa",
+      "#78cdd0"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "292",
+    "name": "292",
+    "colors": [
+      "#ffefae",
+      "#eeb480",
+      "#c5a56e",
+      "#c2ae93"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "293",
+    "name": "293",
+    "colors": [
+      "#bb7125",
+      "#b5decc",
+      "#709390",
+      "#489b6e"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "294",
+    "name": "294",
+    "colors": [
+      "#f5ecc2",
+      "#fdbf68",
+      "#437742",
+      "#97acc8"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "295",
+    "name": "295",
+    "colors": [
+      "#fdbf68",
+      "#fff200",
+      "#006eb8",
+      "#0d1c43"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "296",
+    "name": "296",
+    "colors": [
+      "#f5ecc2",
+      "#d8a37b",
+      "#71502f",
+      "#34454c"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "297",
+    "name": "297",
+    "colors": [
+      "#ae5224",
+      "#f99d1b",
+      "#6b7140",
+      "#40456a"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "298",
+    "name": "298",
+    "colors": [
+      "#bb7125",
+      "#f8ed43",
+      "#f15a30",
+      "#111314"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "299",
+    "name": "299",
+    "colors": [
+      "#c53c69",
+      "#eea78c",
+      "#819238",
+      "#007190"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "300",
+    "name": "300",
+    "colors": [
+      "#f48067",
+      "#fdbf68",
+      "#b5decc",
+      "#78cdd0"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "301",
+    "name": "301",
+    "colors": [
+      "#e31f26",
+      "#ebd3a2",
+      "#788860",
+      "#a36aa5"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "302",
+    "name": "302",
+    "colors": [
+      "#fdbf68",
+      "#c2ae93",
+      "#bce4e5",
+      "#007190"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "303",
+    "name": "303",
+    "colors": [
+      "#fbe6a0",
+      "#f15a30",
+      "#253122",
+      "#b6bfc1"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "304",
+    "name": "304",
+    "colors": [
+      "#793327",
+      "#fdbf68",
+      "#8b835b",
+      "#00978d"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "305",
+    "name": "305",
+    "colors": [
+      "#eeb480",
+      "#ffdd00",
+      "#b2b73e",
+      "#b5decc"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "306",
+    "name": "306",
+    "colors": [
+      "#f8ed43",
+      "#00978d",
+      "#009465",
+      "#bce4e5"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "307",
+    "name": "307",
+    "colors": [
+      "#cc1236",
+      "#b5b1d8",
+      "#a36aa5",
+      "#501345"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "308",
+    "name": "308",
+    "colors": [
+      "#d1b0a7",
+      "#cb2f43",
+      "#d96629",
+      "#96d1aa"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "309",
+    "name": "309",
+    "colors": [
+      "#f3a257",
+      "#f68c50",
+      "#40456a",
+      "#064f6e"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "310",
+    "name": "310",
+    "colors": [
+      "#f5ecc2",
+      "#eeb480",
+      "#837e31",
+      "#253122"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "311",
+    "name": "311",
+    "colors": [
+      "#ab2439",
+      "#fdbf68",
+      "#b7c2a9",
+      "#c7d14f"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "312",
+    "name": "312",
+    "colors": [
+      "#ae5224",
+      "#f99d1b",
+      "#709390",
+      "#005b8d"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "313",
+    "name": "313",
+    "colors": [
+      "#cc1236",
+      "#fff200",
+      "#008842",
+      "#111314"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "314",
+    "name": "314",
+    "colors": [
+      "#f37f94",
+      "#793327",
+      "#1c4286",
+      "#4e1d4c"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "315",
+    "name": "315",
+    "colors": [
+      "#f48067",
+      "#f5ecc2",
+      "#f3a257",
+      "#bf5892"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "316",
+    "name": "316",
+    "colors": [
+      "#82241f",
+      "#009465",
+      "#4f4086",
+      "#59256a"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "317",
+    "name": "317",
+    "colors": [
+      "#fcc79b",
+      "#c2ae93",
+      "#f8ed43",
+      "#b5decc"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "318",
+    "name": "318",
+    "colors": [
+      "#806e4b",
+      "#42533e",
+      "#004f46",
+      "#112f2c"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "319",
+    "name": "319",
+    "colors": [
+      "#bb7125",
+      "#ffdd00",
+      "#f99d1b",
+      "#437742"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "320",
+    "name": "320",
+    "colors": [
+      "#f58e84",
+      "#f5ecc2",
+      "#819238",
+      "#a5c8d1"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "321",
+    "name": "321",
+    "colors": [
+      "#b59392",
+      "#f5ecc2",
+      "#253122",
+      "#97acc8"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "322",
+    "name": "322",
+    "colors": [
+      "#e31f26",
+      "#a84222",
+      "#bf5892",
+      "#6450a1"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "323",
+    "name": "323",
+    "colors": [
+      "#fdc57e",
+      "#b2b73e",
+      "#762c19",
+      "#111314"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "324",
+    "name": "324",
+    "colors": [
+      "#ab2439",
+      "#5a82b3",
+      "#a36aa5",
+      "#b6bfc1"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "325",
+    "name": "325",
+    "colors": [
+      "#da525d",
+      "#fbe6a0",
+      "#e2b540",
+      "#112f2c"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "326",
+    "name": "326",
+    "colors": [
+      "#f5ecc2",
+      "#f15a30",
+      "#afd472",
+      "#87c540"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "327",
+    "name": "327",
+    "colors": [
+      "#f37f94",
+      "#bb7125",
+      "#c2ae93",
+      "#c0a9b3"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "328",
+    "name": "328",
+    "colors": [
+      "#a84222",
+      "#f68c50",
+      "#4b3317",
+      "#00908a"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "329",
+    "name": "329",
+    "colors": [
+      "#fdbf68",
+      "#c0a9b3",
+      "#501345",
+      "#34454c"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "330",
+    "name": "330",
+    "colors": [
+      "#c1c494",
+      "#bce4e5",
+      "#97acc8",
+      "#099197"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "331",
+    "name": "331",
+    "colors": [
+      "#c53c69",
+      "#0d1c43",
+      "#9a72aa",
+      "#4f4086"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "332",
+    "name": "332",
+    "colors": [
+      "#f58e84",
+      "#cb2f43",
+      "#253122",
+      "#004f46"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "333",
+    "name": "333",
+    "colors": [
+      "#ae5224",
+      "#f8ed43",
+      "#96d1aa",
+      "#006eb8"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "334",
+    "name": "334",
+    "colors": [
+      "#fdd4bd",
+      "#837e31",
+      "#afd472",
+      "#007190"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "335",
+    "name": "335",
+    "colors": [
+      "#82241f",
+      "#f99d1b",
+      "#4f4086",
+      "#34454c"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "336",
+    "name": "336",
+    "colors": [
+      "#f37f94",
+      "#793327",
+      "#ffefae",
+      "#42533e"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "337",
+    "name": "337",
+    "colors": [
+      "#6d4145",
+      "#ca92a8",
+      "#713b4c",
+      "#111314"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "338",
+    "name": "338",
+    "colors": [
+      "#a62c37",
+      "#fcb315",
+      "#004f46",
+      "#c0a9b3"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "339",
+    "name": "339",
+    "colors": [
+      "#d8a37b",
+      "#d96629",
+      "#a5c8d1",
+      "#40456a"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "340",
+    "name": "340",
+    "colors": [
+      "#f15a30",
+      "#00b49b",
+      "#b6bfc1",
+      "#111314"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "341",
+    "name": "341",
+    "colors": [
+      "#f48067",
+      "#437742",
+      "#253122",
+      "#a5c8d1"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "342",
+    "name": "342",
+    "colors": [
+      "#f8b6ba",
+      "#fdbf68",
+      "#986f2d",
+      "#253122"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "343",
+    "name": "343",
+    "colors": [
+      "#ae5224",
+      "#ebd3a2",
+      "#635a3a",
+      "#064f6e"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "344",
+    "name": "344",
+    "colors": [
+      "#fdc57e",
+      "#1c4286",
+      "#a36aa5",
+      "#111314"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "345",
+    "name": "345",
+    "colors": [
+      "#793327",
+      "#bce4e5",
+      "#62c6bf",
+      "#6450a1"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "346",
+    "name": "346",
+    "colors": [
+      "#b73f74",
+      "#b5decc",
+      "#c7d14f",
+      "#6d7e77"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "347",
+    "name": "347",
+    "colors": [
+      "#a6a159",
+      "#00b49b",
+      "#005b8d",
+      "#b984af"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "348",
+    "name": "348",
+    "colors": [
+      "#c1c494",
+      "#437742",
+      "#253122",
+      "#501345"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "349",
+    "name": "349",
+    "colors": [
+      "#b71f57",
+      "#007190",
+      "#1c4286",
+      "#111314"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "350",
+    "name": "350",
+    "colors": [
+      "#fcb315",
+      "#96874d",
+      "#709390",
+      "#704357"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "351",
+    "name": "351",
+    "colors": [
+      "#f37f94",
+      "#fdd4bd",
+      "#a7d4e4",
+      "#064f6e"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "352",
+    "name": "352",
+    "colors": [
+      "#c53c69",
+      "#f8ed43",
+      "#78cdd0",
+      "#111314"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "353",
+    "name": "353",
+    "colors": [
+      "#fcc79b",
+      "#cab356",
+      "#c16b27",
+      "#b7c2a9"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "354",
+    "name": "354",
+    "colors": [
+      "#e31f26",
+      "#f3a257",
+      "#bce4e5",
+      "#006eb8"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "355",
+    "name": "355",
+    "colors": [
+      "#b73f74",
+      "#4b3317",
+      "#00b49b",
+      "#007190"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "356",
+    "name": "356",
+    "colors": [
+      "#f8ed43",
+      "#a49531",
+      "#a5c8d1",
+      "#b5b1d8"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "357",
+    "name": "357",
+    "colors": [
+      "#cab356",
+      "#a5c8d1",
+      "#9a72aa",
+      "#34454c"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "358",
+    "name": "358",
+    "colors": [
+      "#f8ed43",
+      "#f37420",
+      "#b4cdc2",
+      "#007190"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "359",
+    "name": "359",
+    "colors": [
+      "#f8ed43",
+      "#762c19",
+      "#bce4e5",
+      "#b6bfc1"
+    ],
+    "isBuiltIn": true
+  },
+  {
+    "id": "360",
+    "name": "360",
+    "colors": [
+      "#5a82b3",
+      "#064f6e",
+      "#7a4456",
+      "#4f4086"
+    ],
+    "isBuiltIn": true
+  }
+]

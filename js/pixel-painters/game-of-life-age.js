@@ -2,7 +2,6 @@
 const c = document.getElementById('pixel-canvas');
 const scale = 4;
 
-// Set canvas resolution based on its display size
 function setCanvasSize() {
   const rect = c.getBoundingClientRect();
   c.width = Math.ceil(rect.width / scale);
@@ -16,15 +15,14 @@ const ctx = c.getContext('2d');
 const w = c.width;
 const h = c.height;
 
-// Colors for different ages (young to old)
-const colors = ['#f4d35e', '#e94560', '#e9c46a', '#2a9d8f', '#415a77', '#264653', '#0d1b2a'];
+const p = window.paletteConfig || { bg: '#0a0a0a', fg: '#f5f5f5', accent: '#6b6b6b', accent2: '#a8a8a8' };
+const colors = [p.accent, p.accent2, p.fg, p.accent, p.accent2, p.fg, p.accent2];
 
 let grid = Array(w).fill().map(() => Array(h).fill(0));
 let age = Array(w).fill().map(() => Array(h).fill(0));
 let next = Array(w).fill().map(() => Array(h).fill(0));
 let nextAge = Array(w).fill().map(() => Array(h).fill(0));
 
-// Random seed - higher density
 for (let i = 0; i < w * h * 0.8; i++) {
   grid[~~(Math.random() * w)][~~(Math.random() * h)] = 1;
 }
@@ -36,9 +34,7 @@ function step() {
       for (let dx = -1; dx <= 1; dx++) {
         for (let dy = -1; dy <= 1; dy++) {
           if (dx === 0 && dy === 0) continue;
-          const nx = (x + dx + w) % w;
-          const ny = (y + dy + h) % h;
-          neighbors += grid[nx][ny];
+          neighbors += grid[(x + dx + w) % w][(y + dy + h) % h];
         }
       }
 
@@ -55,16 +51,14 @@ function step() {
     }
   }
 
-  // Render changes
   for (let x = 0; x < w; x++) {
     for (let y = 0; y < h; y++) {
       if (next[x][y] === 1 && (grid[x][y] === 0 || age[x][y] !== nextAge[x][y])) {
-        // Cell alive - paint with age-based color
         ctx.fillStyle = colors[nextAge[x][y]];
         ctx.fillRect(x, y, 1, 1);
       } else if (next[x][y] === 0 && grid[x][y] === 1) {
-        // Cell just died - erase it
-        ctx.clearRect(x, y, 1, 1);
+        ctx.fillStyle = p.bg;
+        ctx.fillRect(x, y, 1, 1);
       }
     }
   }

@@ -1,0 +1,106 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Personal Tools Suite | Matthew Buckley</title><link rel="stylesheet" href="/_astro/_slug_.BbPH2Ol4.css"></head> <body class="theme-full" style="--bg: #1B3644; --fg: #F2FF26; --accent: #FF7340; --accent2: #340059; --mono-bg: #0a0a0a; --mono-fg: #f5f5f5; --mono-accent: #6b6b6b; --mono-accent2: #a8a8a8;">  <nav class="theme-switch"> <button data-theme="theme-full" title="Full color">◉</button> <button data-theme="theme-halftone" title="Halftone">◐</button> <button data-theme="theme-mono" title="Mono">○</button> </nav> <script>(function(){const palette = "253";
+
+  document.addEventListener("DOMContentLoaded", function () {
+    var saved = localStorage.getItem("tone") || "theme-halftone";
+
+    // Save the current page's palette to localStorage
+    localStorage.setItem("palette", palette);
+    var mainImg = document.querySelector(".side-strip .main-img");
+    var leftImg = document.querySelector(".side-strip .edge-left");
+    var rightImg = document.querySelector(".side-strip .edge-right");
+    var contentImgs = document.querySelectorAll(".content-img img");
+
+    // Get base src from data-src (for lazy loaded) or src
+    function getBaseSrc(img) {
+      return img.dataset.src || img.getAttribute("src");
+    }
+
+    function getMainSrcs() {
+      if (!mainImg) return null;
+      var src = getBaseSrc(mainImg);
+      return {
+        full: src,
+        mono: src.replace("-" + palette + ".", "-mono."),
+        halftone: src.replace("-" + palette + ".", "-halftone."),
+      };
+    }
+
+    var mainSrcs = getMainSrcs();
+    var edgeBase = leftImg ? getBaseSrc(leftImg).replace(/-edge-mid\.png$/, "") : null;
+
+    function getEdgeSrc(theme) {
+      if (!edgeBase) return null;
+      var key =
+        theme === "theme-mono"
+          ? "mono"
+          : theme === "theme-halftone"
+          ? "halftone"
+          : palette;
+      return edgeBase.replace("-" + palette, "-" + key) + "-edge-mid.png";
+    }
+
+    function setTheme(theme) {
+      document.body.className = theme;
+      var key =
+        theme === "theme-mono"
+          ? "mono"
+          : theme === "theme-halftone"
+          ? "halftone"
+          : palette;
+
+      // Update side strip images
+      if (mainImg && mainSrcs) mainImg.src = mainSrcs[theme === "theme-full" ? "full" : key];
+      var edgeSrc = getEdgeSrc(theme);
+      if (leftImg && edgeSrc) leftImg.src = edgeSrc;
+      if (rightImg && edgeSrc) rightImg.src = edgeSrc;
+
+      // Update content images
+      contentImgs.forEach(function(img) {
+        var src = getBaseSrc(img);
+        var newSrc = src.replace(/\/images\/[^\/]+\//, "/images/" + key + "/");
+        img.src = newSrc;
+      });
+    }
+
+    setTheme(saved);
+
+    // Trigger fade-in animation after main image loads
+    var sideStrip = document.querySelector(".side-strip");
+    if (mainImg && sideStrip) {
+      mainImg.onload = function() {
+        sideStrip.removeAttribute("data-animate-pending");
+      };
+    }
+
+    // Highlight active button
+    document.querySelectorAll(".theme-switch button").forEach(function (btn) {
+      if (btn.dataset.theme === saved) {
+        btn.style.opacity = '1';
+      } else {
+        btn.style.opacity = '0.5';
+      }
+      btn.addEventListener("click", function () {
+        var theme = this.dataset.theme;
+        setTheme(theme);
+        localStorage.setItem("tone", theme);
+        // Update button states
+        document.querySelectorAll(".theme-switch button").forEach(function (b) {
+          b.style.opacity = '0.5';
+        });
+        this.style.opacity = '1';
+      });
+    });
+  });
+})();</script> <main class="page-layout"> <article> <header class="article-header"> <a href="/" class="back" onclick="if(history.length > 1) { history.back(); return false; }">←</a> <div> <h1>Personal Tools Suite</h1> </div> </header> <ul class="tags"> <li class="tag tag-1">ai</li><li class="tag tag-2">images</li><li class="tag tag-1">imagemagick</li> </ul> <div class="content">  <p>In my last blog post I said that my next would be about ImageMagick. I was excited to explore more of what I thought was a very fun and interesting library. Instead I am going to talk about a tool that I made with AI. It uses ImageMagick though, so maybe I half kept my word.</p>
+<h2 id="aye-i-made-a-tool">Aye, I made a tool.</h2>
+<p>AI assisted development is very quick, very fun, and I have been using it a lot recently. The technology is in its infancy and is already affecting how a lot of people approach coding. Code generation with relative competency (let’s not say relative to what or whom) at speeds faster than any human can type, makes low-stakes applications and tools much more attainable. I have found this idea very interesting and have been considering how our landscape of user generated tools is going to shift over the coming years. The option of generating ultra specific tools, completely tailored to a singular problem is now likely viable for the average user.</p>
+<h2 id="tool-specificity-in-the-age-of-ai">Tool Specificity in the age of AI</h2>
+<p>You can create a basic tool very quickly with AI. And when I say basic, I mean a tool that handles one thing. One part of the process. A little piece of whatever little puzzle you’re building. And for me it was generating the images that you see to the right. So I decided to develop a tool, using AI to make it easier.</p>
+<p>I went from discovery of ImageMagick with AI, to proof-of-concept image generation with AI, to script suite written by AI and now an Electron app written with AI. This was within days. The ease of discovery, prototyping, and then all the way through to fully working tool is astounding. On top of this, I can continue developing it if my needs change. We are at a point where you can truly create personal software with a fraction of the knowledge it would otherwise require.</p>
+<h2 id="the-emperors-new-suite-of-tools">The Emperor’s New Suite (of Tools)</h2>
+<p>Given that, what does it mean for the future of software? I presume you know the story of the Emperor’s new clothes (or suit). In it the emperor is told that only the smartest people can see a particularly fine piece of clothing. The Emperor, sadly, cannot see them, but not wanting to look a fool says that he can and buys them for a tidy sum. I think this is an interesting analogy so let’s do two thought experiments:</p>
+<p>The emperor was tricked and he was sold no clothes - In this we are all spending our time creating things with AI that have little to no value. I am currently paying Anthropic too much money, every month in fact, so that is not the resolution that I would like.</p>
+<p>The emperor was sold clothes but no one can see them - This is I think the more compelling thought experiment. We have the ability to create our own tools, so specific that they are <em>almost</em> useless. My new tool is valuable to me, but only to me. It’s part of my new suite, yet pointless to anyone else. That has led me to wonder if other devs are doing the same. In the future, will we all be dressing ourselves in our personal tools that no-one else can see or use?</p>
+<h2 id="conclusions">Conclusions</h2>
+<p>The answer is probably no. I can just open source the project and if others want to expand it they are free to do so. Pretty anticlimactic. However, more open source maintainers are closing their projects due to the overuse of AI written code submissions. I feel like I don’t have a nice punchy revelation to end on, so how about a personal conclusion to a journey of creating personal software?</p>
+<p>It was fun.</p>  </div> </article> <aside class="side-strip" data-animate-pending> <img class="edge-left" data-src="/images/personal-tool-suite/personal-tool-suite-253-edge-mid.png" alt=""> <img class="main-img" data-src="/images/personal-tool-suite/personal-tool-suite-253.png" alt=""> <img class="edge-right" data-src="/images/personal-tool-suite/personal-tool-suite-253-edge-mid.png" alt=""> </aside> </main>  </body></html>
