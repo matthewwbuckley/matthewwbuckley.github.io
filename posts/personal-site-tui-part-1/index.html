@@ -1,0 +1,115 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Personal Site TUI Part 1 | matthew w buckley</title><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="stylesheet" href="/_astro/_slug_.BjmOHuIv.css"></head> <body class="theme-full" style="--bg: #1B3644; --fg: #F2FF26; --accent: #FF7340; --accent2: #340059; --mono-bg: #0a0a0a; --mono-fg: #f5f5f5; --mono-accent: #6b6b6b; --mono-accent2: #a8a8a8;">  <nav class="theme-switch"> <button data-theme="theme-full" title="Full color">◉</button> <button data-theme="theme-halftone" title="Halftone">◐</button> <button data-theme="theme-mono" title="Mono">○</button> </nav> <script>(function(){const palette = "253";
+
+  document.addEventListener("DOMContentLoaded", function () {
+    var saved = localStorage.getItem("tone") || "theme-halftone";
+
+    // Save the current page's palette to localStorage
+    localStorage.setItem("palette", palette);
+    var mainImg = document.querySelector(".side-strip .main-img");
+    var leftImg = document.querySelector(".side-strip .edge-left");
+    var rightImg = document.querySelector(".side-strip .edge-right");
+    var contentImgs = document.querySelectorAll(".content-img img");
+
+    // Get base src from data-src (for lazy loaded) or src
+    function getBaseSrc(img) {
+      return img.dataset.src || img.getAttribute("src");
+    }
+
+    function getMainSrcs() {
+      if (!mainImg) return null;
+      var src = getBaseSrc(mainImg);
+      return {
+        full: src,
+        mono: src.replace("-" + palette + ".", "-mono."),
+        halftone: src.replace("-" + palette + ".", "-halftone."),
+      };
+    }
+
+    var mainSrcs = getMainSrcs();
+    var edgeBase = leftImg ? getBaseSrc(leftImg).replace(/-edge-mid\.png$/, "") : null;
+
+    function getEdgeSrc(theme) {
+      if (!edgeBase) return null;
+      var key =
+        theme === "theme-mono"
+          ? "mono"
+          : theme === "theme-halftone"
+          ? "halftone"
+          : palette;
+      return edgeBase.replace("-" + palette, "-" + key) + "-edge-mid.png";
+    }
+
+    function setTheme(theme) {
+      document.body.className = theme;
+      var key =
+        theme === "theme-mono"
+          ? "mono"
+          : theme === "theme-halftone"
+          ? "halftone"
+          : palette;
+
+      // Update side strip images
+      if (mainImg && mainSrcs) mainImg.src = mainSrcs[theme === "theme-full" ? "full" : key];
+      var edgeSrc = getEdgeSrc(theme);
+      if (leftImg && edgeSrc) leftImg.src = edgeSrc;
+      if (rightImg && edgeSrc) rightImg.src = edgeSrc;
+
+      // Update content images
+      contentImgs.forEach(function(img) {
+        var src = getBaseSrc(img);
+        var newSrc = src.replace(/\/images\/[^\/]+\//, "/images/" + key + "/");
+        img.src = newSrc;
+      });
+    }
+
+    setTheme(saved);
+
+    // Trigger fade-in animation after main image loads
+    var sideStrip = document.querySelector(".side-strip");
+    if (mainImg && sideStrip) {
+      mainImg.onload = function() {
+        sideStrip.removeAttribute("data-animate-pending");
+      };
+    }
+
+    // Highlight active button
+    document.querySelectorAll(".theme-switch button").forEach(function (btn) {
+      if (btn.dataset.theme === saved) {
+        btn.style.opacity = '1';
+      } else {
+        btn.style.opacity = '0.5';
+      }
+      btn.addEventListener("click", function () {
+        var theme = this.dataset.theme;
+        setTheme(theme);
+        localStorage.setItem("tone", theme);
+        // Update button states
+        document.querySelectorAll(".theme-switch button").forEach(function (b) {
+          b.style.opacity = '0.5';
+        });
+        this.style.opacity = '1';
+      });
+    });
+  });
+})();</script> <main class="page-layout"> <article> <header class="article-header"> <a href="/" class="back" onclick="if(history.length > 1) { history.back(); return false; }">←</a> <div> <h1>Personal Site TUI Part 1</h1> </div> </header> <ul class="tags"> <li class="tag tag-1">go</li><li class="tag tag-1">devops</li> </ul> <div class="content">  <p>In my spare time I have been building a Claude wrapper. It’s on around its 4th or 5th iteration by now. I have gone from pure text files, to more pure text files, to a whole Electron app (this one took a long time), and then I decided to make a Terminal User Interface (TUI). First I went Rust because I was looking for something new to learn, then TypeScript to make it work better with the Agent SDK (TypeScript or Python at the moment), and then when I was fighting against <a href="https://github.com/vadimdemedes/ink">Ink</a> — which is what Claude Code is currently written in, as far as I know — I found <a href="https://charm.sh">Charm</a>. The wrapper is still ongoing, but I wanted a smaller project I could do in public and explore some parts of tech that I don’t know. All I needed was an idea.</p>
+<h1 id="be-my-guest">Be my guest</h1>
+<p>I thought a little guestbook would be nice — someone SSHs into my site, gets a terminal interface, and can leave a message that shows up on the web. So the plan is a Go backend with a TUI, a database to store the entries, and an HTTP API to return them to the frontend. One binary, two interfaces.</p>
+<h1 id="a-drop-in-the-ocean">A Drop in the Ocean</h1>
+<p>The first step is picking a cloud provider. I didn’t want something overly complex, but I also didn’t want something completely “plug-and-play”. I don’t have a lot of experience with devops, so dealing with a real VM felt like the right level of friction. Because of this I chose <a href="https://www.digitalocean.com">DigitalOcean</a>.</p>
+<p>A basic droplet — 512MB RAM, 1 CPU, 10GB SSD — costs $4 a month. Enough to run a Go binary and a SQLite file. I skipped the managed database upsell ($15/month for infrastructure I’d never use) and picked Ubuntu 24.04.</p>
+<h1 id="a-guided-dip">A Guided Dip</h1>
+<p>I am using Claude to guide me through this. The thing I’ve come to appreciate about working with AI in unfamiliar territory is that it gives you a knowledgeable companion without the awkwardness of asking a person obvious questions. I asked a lot of obvious questions.</p>
+<p>It turned out I already had an SSH key on my machine (<code>id_ed25519</code> — better than the older RSA format, apparently). I pasted the public key into DigitalOcean during setup and connected straight in as root. First thing Claude had me do was create a normal user and stop logging in as root, which I did. The user creation process on Ubuntu asks for your room number, which I thought was funny.</p>
+<p>After that: disable root login in the SSH config, restart the SSH daemon, and set up <code>ufw</code> — the firewall. Allow SSH, enable it, done. The whole thing took about fifteen minutes and now I have a locked-down server sitting in a data centre somewhere.</p>
+<h1 id="dependencies">Dependencies</h1>
+<p>With the server secured, we need two things installed: Go and nginx.</p>
+<p>Go is straightforward — <code>sudo apt install golang-go</code> — and we end up with version 1.22.2. nginx takes one command too. What nginx does is sit in front of the Go application and act as a reverse proxy. A reverse proxy is a confusing name for a simple idea: it accepts requests from the internet on behalf of your app, handles things like TLS, and forwards traffic through. Your app never gets exposed directly. We open the firewall for it and move on.</p>
+<h1 id="a-record">A Record</h1>
+<p>The last thing for today is pointing a subdomain at the droplet. I head into Namecheap, add an A record with the host set to <code>tui</code> and the value set to the droplet’s IP, and now <code>tui.matthewwbuckley.com</code> exists in the world. DNS propagation can take a while, but it comes through quickly.</p>
+<h1 id="https">HTTPS</h1>
+<p>With the subdomain live, we can get a certificate. We install certbot and run it against the domain. Let’s Encrypt proves you own the domain by temporarily serving a file at a known URL and checking it’s reachable — if it is, you clearly control the server behind that domain. Certificate issued. certbot also edits the nginx config to use it and sets up a cron job to auto-renew every 90 days. The whole thing is automated and free, which still feels slightly miraculous.</p>
+<h1 id="nginx-config">nginx config</h1>
+<p>The last piece is telling nginx what to actually do with incoming requests. By default it just serves a placeholder page. We create a config file in <code>/etc/nginx/sites-available/</code> — the filename is just a label for your own sanity, it means nothing to nginx. What matters is the <code>server_name</code> line inside it, which is what nginx actually uses to route traffic to the right place.</p>
+<p>The config says: any request for <code>tui.matthewwbuckley.com</code>, forward it to <code>localhost:8080</code>. That’s where the Go app will listen. There’s nothing on port 8080 yet, but the plumbing is in place.</p>
+<p>One thing I keep noticing in this kind of work: some things are meaningful and some things are just labels, and nothing tells you which is which. You have to ask, or find out the hard way.</p>
+<p>The server is ready. Next time I write some Go, which should be interesting because I don’t know any Go.</p>  </div> </article> <aside class="side-strip" data-animate-pending> <img class="edge-left" data-src="/images/personal-site-tui-part-1/personal-tool-suite-253-edge-mid.png" alt=""> <img class="main-img" data-src="/images/personal-site-tui-part-1/personal-tool-suite-253.png" alt=""> <img class="edge-right" data-src="/images/personal-site-tui-part-1/personal-tool-suite-253-edge-mid.png" alt=""> </aside> </main>  </body></html>

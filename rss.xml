@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Matthew w Buckley</title><description>Programming &amp; design</description><link>https://matthewwbuckley.com/</link><item><title>Personal Site TUI Part 1</title><link>https://matthewwbuckley.com/posts/personal-site-tui-part-1/</link><guid isPermaLink="true">https://matthewwbuckley.com/posts/personal-site-tui-part-1/</guid><pubDate>Sun, 22 Mar 2026 00:00:00 GMT</pubDate><content:encoded>In my spare time I have been building a Claude wrapper. It&apos;s on around its 4th or 5th iteration by now. I have gone from pure text files, to more pure text files, to a whole Electron app (this one took a long time), and then I decided to make a Terminal User Interface (TUI). First I went Rust because I was looking for something new to learn, then TypeScript to make it work better with the Agent SDK (TypeScript or Python at the moment), and then when I was fighting against [Ink](https://github.com/vadimdemedes/ink) — which is what Claude Code is currently written in, as far as I know — I found [Charm](https://charm.sh). The wrapper is still ongoing, but I wanted a smaller project I could do in public and explore some parts of tech that I don&apos;t know. All I needed was an idea.
+
+# Be my guest
+
+I thought a little guestbook would be nice — someone SSHs into my site, gets a terminal interface, and can leave a message that shows up on the web. So the plan is a Go backend with a TUI, a database to store the entries, and an HTTP API to return them to the frontend. One binary, two interfaces.
+
+# A Drop in the Ocean
+
+The first step is picking a cloud provider. I didn&apos;t want something overly complex, but I also didn&apos;t want something completely &quot;plug-and-play&quot;. I don&apos;t have a lot of experience with devops, so dealing with a real VM felt like the right level of friction. Because of this I chose [DigitalOcean](https://www.digitalocean.com).
+
+A basic droplet — 512MB RAM, 1 CPU, 10GB SSD — costs $4 a month. Enough to run a Go binary and a SQLite file. I skipped the managed database upsell ($15/month for infrastructure I&apos;d never use) and picked Ubuntu 24.04.
+
+# A Guided Dip
+
+I am using Claude to guide me through this. The thing I&apos;ve come to appreciate about working with AI in unfamiliar territory is that it gives you a knowledgeable companion without the awkwardness of asking a person obvious questions. I asked a lot of obvious questions.
+
+It turned out I already had an SSH key on my machine (`id_ed25519` — better than the older RSA format, apparently). I pasted the public key into DigitalOcean during setup and connected straight in as root. First thing Claude had me do was create a normal user and stop logging in as root, which I did. The user creation process on Ubuntu asks for your room number, which I thought was funny.
+
+After that: disable root login in the SSH config, restart the SSH daemon, and set up `ufw` — the firewall. Allow SSH, enable it, done. The whole thing took about fifteen minutes and now I have a locked-down server sitting in a data centre somewhere.
+
+# Dependencies
+
+With the server secured, we need two things installed: Go and nginx.
+
+Go is straightforward — `sudo apt install golang-go` — and we end up with version 1.22.2. nginx takes one command too. What nginx does is sit in front of the Go application and act as a reverse proxy. A reverse proxy is a confusing name for a simple idea: it accepts requests from the internet on behalf of your app, handles things like TLS, and forwards traffic through. Your app never gets exposed directly. We open the firewall for it and move on.
+
+# A Record
+
+The last thing for today is pointing a subdomain at the droplet. I head into Namecheap, add an A record with the host set to `tui` and the value set to the droplet&apos;s IP, and now `tui.matthewwbuckley.com` exists in the world. DNS propagation can take a while, but it comes through quickly.
+
+# HTTPS
+
+With the subdomain live, we can get a certificate. We install certbot and run it against the domain. Let&apos;s Encrypt proves you own the domain by temporarily serving a file at a known URL and checking it&apos;s reachable — if it is, you clearly control the server behind that domain. Certificate issued. certbot also edits the nginx config to use it and sets up a cron job to auto-renew every 90 days. The whole thing is automated and free, which still feels slightly miraculous.
+
+# nginx config
+
+The last piece is telling nginx what to actually do with incoming requests. By default it just serves a placeholder page. We create a config file in `/etc/nginx/sites-available/` — the filename is just a label for your own sanity, it means nothing to nginx. What matters is the `server_name` line inside it, which is what nginx actually uses to route traffic to the right place.
+
+The config says: any request for `tui.matthewwbuckley.com`, forward it to `localhost:8080`. That&apos;s where the Go app will listen. There&apos;s nothing on port 8080 yet, but the plumbing is in place.
+
+One thing I keep noticing in this kind of work: some things are meaningful and some things are just labels, and nothing tells you which is which. You have to ask, or find out the hard way.
+
+The server is ready. Next time I write some Go, which should be interesting because I don&apos;t know any Go.</content:encoded></item><item><title>New Personal Site</title><link>https://matthewwbuckley.com/posts/redesign-of-personal-site/</link><guid isPermaLink="true">https://matthewwbuckley.com/posts/redesign-of-personal-site/</guid><pubDate>Sun, 07 Dec 2025 00:00:00 GMT</pubDate><content:encoded>import AmazonLink from &quot;../../components/AmazonLink.astro&quot;;
+
+I was recently watching [a video by The Primeagen](https://www.youtube.com/watch?v=ciNXbR5wvhU) who was looking at an article called [&quot;Why your website should be under 14kB in size&quot;](https://endtimes.dev/why-your-website-should-be-under-14kb-in-size/). It gave me the excuse I needed to rewrite my website.
+
+### TCP communication
+
+The first communication from a server to the client is often 10 TCP packets. The client will return an acknowledgement, then the server sends more. Each TCP package contains about 1.4kb of data, leading to a 14kb limit. If we have everything we need inside that 14kb we can avoid that round trip, loading the website as soon as possible.
+
+### Fun challenges
+
+The first thing I do when trying to design a website is to try to pick fonts which fit the theme/idea I am aiming towards. Generally, fonts are pretty costly files to fit into 14kb. Too costly unless you do something special. So no fun fonts for me (yet).
+
+How about images? They are pretty costly too. You may see that I have decided to go for a pixelated look. I grew up with point and click adventure games like Monkey Island, Day of the Tentacle, and (my favorite) Toonstruck, so I am very fond of pixel art. So this limitation was a benefit to me.
+
+### Colour
+
+The images are still quite costly though if I want large ones. I had recently bought an interesting book on natural colour combinations from Japan&lt;sup&gt;\*&lt;/sup&gt; and thought it would be fun to use it as a source of colour palettes for my site. This page uses palette 253 with &quot;Lemon Yellow&quot;, &quot;Apricot Orange&quot;, &quot;Slate Color&quot;, and &quot;Cotinga Purple&quot;. Personally, I hate it, but why should that stop me?
+
+One reason is contrast. Contrast is a big problem with some of these palettes. My original plan was to allow the user to switch between the palette and monochrome. Then I had the idea to mix both of these, to create a half tone. You can toggle between them using the buttons in the top right.
+
+To match the image colours to the palette I used color quantization, and with full, half and monochrome palettes I need 3 images. The full and monochrome images each have 4 colours, but the halftone is done a little different. We dont quantize the half tones, we quantize the full tone and combine it with the monochrome. This leads to images with 4 hues, each with up to 4 tones. It was a happy accident really, but it adds a lot of depth to the image while keeping the restricted colour palette I wanted, so I decided to keep it.
+
+### Am I lazy?
+
+The question is: Did I succeed in creating a site that loads in under 14kb? No, not really....
+
+The image size is too big, even at only 4 colours its pushing 10kb and with the half tone I blow past the limit in one image. Really though I dont think it matters. I wanted to create a small site, and it has an aesthetic which suits my interests. I just made the image load after first render and gave it an old school load in animation.
+
+### Conclusions
+
+Overall I am very happy with how the website turned out. There are a lot of little pieces that add up to be kind of interesting. It&apos;s not perfect, but I think it&apos;s good enough. I may even break the size limit properly and add a custom font (don&apos;t hate me if I forget to exclude it on this page for posterity).
+
+Hope you have enjoyed. I am trying to keep these posts short and punchy. I didnt even go into how I am using Astro&apos;s static site generation which is a big reason it&apos;s as small as it is. Next I think I will write about the image quantization library [imageMagick](https://github.com/ImageMagick/ImageMagick), as I want to know what more you can do with it.
+
+---
+
+\* - &lt;AmazonLink asin=&quot;4861522471&quot; text=&quot;A Dictionary of Color Combinations&quot; /&gt;. It&apos;s by Sanzo Wada, based on an original 6-volume work called Haishoku Soukan, and one of the first considerations of how colours are used in combination. Sadly does not come with hexcodes or rgb values. You can get all the colours palettes online if you want, but if you want a little book with them in you can use my affiliate link above.</content:encoded></item><item><title>Personal Tools Suite</title><link>https://matthewwbuckley.com/posts/personal-tool-suite/</link><guid isPermaLink="true">https://matthewwbuckley.com/posts/personal-tool-suite/</guid><pubDate>Thu, 09 Jan 2025 00:00:00 GMT</pubDate><content:encoded>In my last blog post I said that my next would be about ImageMagick. I was excited to explore more of what I thought was a very fun and interesting library. Instead I am going to talk about a tool that I made with AI. It uses ImageMagick though, so maybe I half kept my word.
+
+## Aye, I made a tool.
+
+AI assisted development is very quick, very fun, and I have been using it a lot recently. The technology is in its infancy and is already affecting how a lot of people approach coding. Code generation with relative competency (let&apos;s not say relative to what or whom) at speeds faster than any human can type, makes low-stakes applications and tools much more attainable. I have found this idea very interesting and have been considering how our landscape of user generated tools is going to shift over the coming years. The option of generating ultra specific tools, completely tailored to a singular problem is now likely viable for the average user.
+
+## Tool Specificity in the age of AI
+
+You can create a basic tool very quickly with AI. And when I say basic, I mean a tool that handles one thing. One part of the process. A little piece of whatever little puzzle you&apos;re building. And for me it was generating the images that you see to the right. So I decided to develop a tool, using AI to make it easier.
+
+I went from discovery of ImageMagick with AI, to proof-of-concept image generation with AI, to script suite written by AI and now an Electron app written with AI. This was within days. The ease of discovery, prototyping, and then all the way through to fully working tool is astounding. On top of this, I can continue developing it if my needs change. We are at a point where you can truly create personal software with a fraction of the knowledge it would otherwise require.
+
+## The Emperor&apos;s New Suite (of Tools)
+
+Given that, what does it mean for the future of software? I presume you know the story of the Emperor&apos;s new clothes (or suit). In it the emperor is told that only the smartest people can see a particularly fine piece of clothing. The Emperor, sadly, cannot see them, but not wanting to look a fool says that he can and buys them for a tidy sum. I think this is an interesting analogy so let&apos;s do two thought experiments:
+
+The emperor was tricked and he was sold no clothes - In this we are all spending our time creating things with AI that have little to no value. I am currently paying Anthropic too much money, every month in fact, so that is not the resolution that I would like.
+
+The emperor was sold clothes but no one can see them - This is I think the more compelling thought experiment. We have the ability to create our own tools, so specific that they are _almost_ useless. My new tool is valuable to me, but only to me. It&apos;s part of my new suite, yet pointless to anyone else. That has led me to wonder if other devs are doing the same. In the future, will we all be dressing ourselves in our personal tools that no-one else can see or use?
+
+## Conclusions
+
+The answer is probably no. I can just open source the project and if others want to expand it they are free to do so. Pretty anticlimactic. However, more open source maintainers are closing their projects due to the overuse of AI written code submissions. I feel like I don&apos;t have a nice punchy revelation to end on, so how about a personal conclusion to a journey of creating personal software?
+
+It was fun.</content:encoded></item><item><title>Rendering in React</title><link>https://matthewwbuckley.com/posts/react-rendering/</link><guid isPermaLink="true">https://matthewwbuckley.com/posts/react-rendering/</guid><pubDate>Tue, 12 Mar 2024 00:00:00 GMT</pubDate><content:encoded>import {
+  BasicExample,
+  ChildExample,
+  ParentExample,
+  ParentWrapExample,
+  ContextExample,
+  MemoExample,
+  EqualityExample,
+  CallbackExample,
+} from &apos;../../components/react-rendering/demos.tsx&apos;;
+
+React can make applications incredibly reactive, but with that comes a challenge — React is a glutton for recalculation and re-renders. Every time React detects a difference in props or state, it may re-render components, sometimes unnecessarily. Writing performant React code isn&apos;t just about making things reactive; it&apos;s about working with React to help it avoid its gluttonous impulse to re-render everything.
+
+The demos below flash **blue** on mount and **yellow** on re-render.
+
+## The Basics
+
+A single component with a single state variable. Press the button to increment the count. The component re-renders, and you&apos;ll see it flash.
+
+&lt;BasicExample client:load /&gt;
+
+The count flashed because its value changed. That caused the whole `CounterComponent` to flash too — because it re-rendered.
+
+Now, what happens when we add a child?
+
+## The Inevitable Complexity of Children
+
+Here the parent is a static wrapper — it has no state of its own. The child holds all the state. Increment and watch what re-renders.
+
+&lt;ChildExample client:load /&gt;
+
+State changes in the child, the child re-renders — simple. But things get more complicated when the parent updates.
+
+### The Parent Trap
+
+A pretty common pattern: nested components, each containing the next.
+
+```js
+const Parent = () =&gt; {
+  const [count, setCount] = useState(0);
+  return (
+    &lt;div&gt;
+      &lt;Child /&gt;
+    &lt;/div&gt;
+  );
+};
+```
+
+&lt;ParentExample client:load /&gt;
+
+Everything re-renders. The parent updated, so React re-renders the whole tree below it.
+
+You may have noticed the children flash after the parent. That&apos;s a visual delay I added — React renders the tree top-down, calling each component function in order from parent to child. I think of it as: the parent sets the stage, then the children perform.
+
+## Reconciliation
+
+What do you get from calling a React function? Eventually, an object — derived from the JSX your component returns. Reconciliation is React comparing each level of that object to what it was on the previous render.
+
+The key insight is: React only re-renders a component if it thinks something relevant has changed. &quot;Relevant&quot; means a change in the component&apos;s own state, its props, or the context it consumes. If we&apos;re careful about how we structure the tree, we can avoid unnecessary re-renders without any extra tools.
+
+If we extract the stateful part into its own component and pass the rest as `children`, something interesting happens:
+
+```js
+const Counter = ({ children }) =&gt; {
+  const [count, setCount] = useState(0);
+  return (
+    &lt;div&gt;
+      &lt;button onClick={() =&gt; setCount(c =&gt; c + 1)}&gt;Increment&lt;/button&gt;
+      {children}
+    &lt;/div&gt;
+  );
+};
+
+const Parent = () =&gt; (
+  &lt;Counter&gt;
+    &lt;Child&gt;
+      &lt;Grandchild /&gt;
+    &lt;/Child&gt;
+  &lt;/Counter&gt;
+);
+```
+
+&lt;ParentWrapExample client:load /&gt;
+
+The children don&apos;t re-render. `Counter` updated — it owns the state — but `Child` and `Grandchild` were passed in from `Parent`, which didn&apos;t re-render. React sees that their element descriptions haven&apos;t changed, so it leaves them alone.
+
+This is especially useful with React Context, which is typically defined high up in the tree. Here&apos;s a Provider with two Consumers — one updates the value, one displays it:
+
+&lt;ContextExample client:load /&gt;
+
+The `Child` components don&apos;t re-render. Only the components that consume context re-render when context changes.
+
+## Memoising Components
+
+What if we know a component hasn&apos;t changed, despite having a parent that has? We can wrap it in `React.memo()`:
+
+```js
+const MemoisedChild = React.memo(() =&gt; {
+  return &lt;Child /&gt;;
+});
+```
+
+&lt;MemoExample client:load /&gt;
+
+The parent re-renders, but the memoised child doesn&apos;t. `React.memo()` skips calling the function and returns its previous value — unless props change.
+
+## The Problem of Equality
+
+**If you have two objects with the same values, are they equal?**
+
+In JavaScript — no. Objects are compared by reference, not by value. That means a new object created on every render is never equal to the previous one, even if its contents are identical. And that breaks memoisation.
+
+&lt;EqualityExample client:load /&gt;
+
+The component receiving a primitive (`&quot;Hello&quot;`) doesn&apos;t re-render — strings compare by value. The component receiving a plain object does re-render — it&apos;s a new reference every time. The memoised object doesn&apos;t re-render — `useMemo` keeps the reference stable.
+
+### Callbacks
+
+Functions have the same problem. A function defined inline is a new reference on every render. `useCallback` solves this the same way `useMemo` solves it for values.
+
+&lt;CallbackExample client:load /&gt;
+
+## Conclusions
+
+React is a little too reactive, and we have tools for reining it in:
+
+- **Structure** — extract dynamic elements so reconciliation does the work for free
+- **`React.memo()`** — skip re-renders when props haven&apos;t changed
+- **`useMemo`** — stabilise object references between renders
+- **`useCallback`** — stabilise function references between renders
+
+Some of you may be thinking: didn&apos;t React announce a compiler that makes all this manual optimisation unnecessary? Yeah. There is that. It&apos;s still interesting though, and it&apos;s pretty easy to write.
+
+### References
+
+1. [What is JSX](https://kentcdodds.com/blog/what-is-jsx) — Kent C. Dodds
+2. [A deep dive into React&apos;s reconciliation algorithm](https://www.dhiwise.com/post/a-deep-dive-into-react-reconciliation-algorithm)
+3. [Reconciliation in React](https://www.developerway.com/posts/reconciliation-in-react)
+4. [Optimize React re-renders](https://kentcdodds.com/blog/optimize-react-re-renders) — Kent C. Dodds
+5. [Equality comparisons in JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Equality_comparisons_and_sameness)
+6. [useMemo and useCallback](https://www.joshwcomeau.com/react/usememo-and-usecallback/) — Josh W. Comeau</content:encoded></item></channel></rss>
